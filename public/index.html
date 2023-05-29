@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <title>Crypto Investment Recommendation</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+    /* Add your custom styles here */
+  </style>
+</head>
+
+<body>
+  <h1>What Crypto Should I Buy?</h1>
+  <section id="description">
+    <h2>How It Works</h2>
+    <p>
+      The Crypto Investment Recommendation app utilizes the CoinMarketCap API to provide investment recommendations for cryptocurrencies.
+      Upon clicking the "Get Recommendation" button, the app sends a request to the server, which makes an API call to CoinMarketCap to retrieve
+      the latest market data for the top 5 cryptocurrencies. The server analyzes the data and identifies the most valuable token based on the market ranking.
+      The recommendation is then displayed on the page.
+    </p>
+  </section>
+  <button id="recommendBtn">Get Recommendation</button>
+  <div id="result"></div>
+
+  <script>
+    $(document).ready(function() {
+      $("#recommendBtn").on("click", function() {
+        // Make API request to the server for the recommendation
+        $.ajax({
+          url: "/api/recommendation",
+          type: "GET",
+          success: function(response) {
+            $("#result").text(response);
+          },
+          error: function(error) {
+            console.log(error);
+            $("#result").text("Error occurred. Please try again.");
+          }
+        });
+      });
+    });
+  </script>
+</body>
+
+</html>
